@@ -1,8 +1,9 @@
 import { createServerClient } from '@supabase/ssr';
+import type { SetAllCookies } from '@supabase/ssr';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import type { Database } from '@/types/supabase';
-import { supabasePublishableKey, supabaseUrl } from './env';
+import { assertSupabaseEnv, supabasePublishableKey, supabaseUrl } from './env';
 
 export const updateSession = async (request: NextRequest) => {
   const response = NextResponse.next({
@@ -11,10 +12,11 @@ export const updateSession = async (request: NextRequest) => {
     }
   });
 
+  assertSupabaseEnv();
   const supabase = createServerClient<Database>(supabaseUrl, supabasePublishableKey, {
     cookies: {
       getAll: () => request.cookies.getAll(),
-      setAll: (cookiesToSet) => {
+      setAll: (cookiesToSet: Parameters<SetAllCookies>[0]) => {
         for (const { name, value, options } of cookiesToSet) {
           response.cookies.set(name, value, options);
         }

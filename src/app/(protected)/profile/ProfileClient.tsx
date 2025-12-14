@@ -96,7 +96,7 @@ export const ProfileClient = ({ userEmail, initialSpecialist }: ProfileClientPro
         const { data, error } = await supabase
           .from('specialists')
           .insert(payload)
-          .select('*')
+          .select<'*', SpecialistRow>('*')
           .single();
 
         if (error) {
@@ -119,7 +119,7 @@ export const ProfileClient = ({ userEmail, initialSpecialist }: ProfileClientPro
         .from('specialists')
         .update(payload)
         .eq('id', specialist.id)
-        .select('*')
+        .select<'*', SpecialistRow>('*')
         .single();
 
       if (error) {

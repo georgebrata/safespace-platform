@@ -3,6 +3,8 @@ import { createServerSupabaseClient } from '@/lib/supabase/server';
 import type { SpecialistRow } from '@/types/supabase';
 import { SpecialistsClient } from './SpecialistsClient';
 
+export const dynamic = 'force-dynamic';
+
 export default async function SpecialistsPage() {
   const supabase = await createServerSupabaseClient();
   const {
@@ -13,7 +15,7 @@ export default async function SpecialistsPage() {
 
   const { data, error } = await supabase
     .from('specialists')
-    .select('*')
+    .select<'*', SpecialistRow>('*')
     .eq('email', userEmail)
     .order('created_at', { ascending: false });
 

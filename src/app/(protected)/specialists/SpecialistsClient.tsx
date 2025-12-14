@@ -148,7 +148,7 @@ export const SpecialistsClient = ({ initialSpecialists, userEmail }: Specialists
         const { data, error } = await supabase
           .from('specialists')
           .insert(payload)
-          .select('*')
+          .select<'*', SpecialistRow>('*')
           .single();
 
         if (error) {
@@ -176,7 +176,7 @@ export const SpecialistsClient = ({ initialSpecialists, userEmail }: Specialists
           .from('specialists')
           .update(payload)
           .eq('id', dialog.specialist.id)
-          .select('*')
+          .select<'*', SpecialistRow>('*')
           .single();
 
         if (error) {
