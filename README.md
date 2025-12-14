@@ -6,16 +6,6 @@
 - **Supabase** using `@supabase/supabase-js` + `@supabase/ssr` (cookie-based SSR auth)
 - **Vercel** deployment friendly
 
-### Environment variables (required)
-Add these in **Vercel → Project → Settings → Environment Variables** (Production + Preview + Development), or locally in a `.env.local` file:
-
-```
-NEXT_PUBLIC_SUPABASE_URL=https://vintoxzeoruioeapnpnh.supabase.co
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY=sb_publishable_y0a7pQQgTcZI71ajv4W6rg_ZpIZKe77
-```
-
-You can copy `env.example` → `.env.local`.
-
 ### Routes
 - Public:
   - `/login`
