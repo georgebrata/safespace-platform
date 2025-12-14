@@ -1,0 +1,42 @@
+import { Box, Paper, Typography } from '@mui/material';
+import { createServerSupabaseClient } from '@/lib/supabase/server';
+import type { SpecialistRow } from '@/types/supabase';
+import { SpecialistsClient } from './SpecialistsClient';
+
+export default async function SpecialistsPage() {
+  const supabase = await createServerSupabaseClient();
+  const {
+    data: { user }
+  } = await supabase.auth.getUser();
+
+  const userEmail = (user?.email ?? '').trim().toLowerCase();
+
+  const { data, error } = await supabase
+    .from('specialists')
+    .select('*')
+    .eq('email', userEmail)
+    .order('created_at', { ascending: false });
+
+  const initialSpecialists: SpecialistRow[] = data ?? [];
+
+  return (
+    <Box sx={{ display: 'grid', gap: 2 }}>
+      <Typography variant="h4">Specialists</Typography>
+
+      {error ? (
+        <Paper sx={{ p: 2.5 }}>
+          <Typography color="error" sx={{ fontWeight: 700 }}>
+            Failed to load specialists
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {error.message}
+          </Typography>
+        </Paper>
+      ) : null}
+
+      <SpecialistsClient userEmail={userEmail} initialSpecialists={initialSpecialists} />
+    </Box>
+  );
+}
+
+
