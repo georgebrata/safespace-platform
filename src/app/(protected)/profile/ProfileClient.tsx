@@ -19,13 +19,6 @@ import {
 import { createBrowserSupabaseClient } from '@/lib/supabase/client';
 import type { SpecialistInsert, SpecialistRow, SpecialistUpdate } from '@/types/supabase';
 
-const optionalEmail = z
-  .string()
-  .trim()
-  .refine((v) => v === '' || z.string().email().safeParse(v).success, {
-    message: 'Enter a valid email'
-  });
-
 const optionalUrl = z
   .string()
   .trim()
