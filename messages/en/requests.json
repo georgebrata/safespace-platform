@@ -1,0 +1,39 @@
+{
+  "requests": {
+    "title": "Chat requests",
+    "cardTitle": "Request - {id}",
+    "tabs": {
+      "all": "All requests",
+      "mine": "My requests"
+    },
+    "status": {
+      "pending": "Pending",
+      "accepted": "Accepted",
+      "closed": "Closed"
+    },
+    "fields": {
+      "createdBy": "Created by",
+      "createdAt": "Created",
+      "closedAt": "Closed"
+    },
+    "ongoing": "Ongoing",
+    "actions": {
+      "takeCase": "Take case",
+      "requestChat": "I want to talk with a specialist",
+      "requestChatOngoing": "Requesting…"
+    }
+    ,
+    "noSpecialist": "You don't have a specialist profile yet.",
+    "noRequests": "No requests.",
+    "errors": {
+      "loadFailed": "Failed to load requests.",
+      "acceptFailed": "Failed to accept request.",
+      "createFailed": "Failed to create request.",
+      "missingUser": "Missing user session. Please re-login."
+    },
+    "notifications": {
+      "accepted": "Request accepted.",
+      "created": "Request sent."
+    }
+  }
+}

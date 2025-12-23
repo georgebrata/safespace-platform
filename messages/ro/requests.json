@@ -1,0 +1,39 @@
+{
+  "requests": {
+    "title": "Cereri de chat",
+    "cardTitle": "Cerere - {id}",
+    "tabs": {
+      "all": "Toate cererile",
+      "mine": "Cererile mele"
+    },
+    "status": {
+      "pending": "În așteptare",
+      "accepted": "Acceptată",
+      "closed": "Închisă"
+    },
+    "fields": {
+      "createdBy": "Creat de",
+      "createdAt": "Creat",
+      "closedAt": "Închis"
+    },
+    "ongoing": "În desfășurare",
+    "actions": {
+      "takeCase": "Preia cazul",
+      "requestChat": "Vreau să vorbesc cu un specialist",
+      "requestChatOngoing": "Se solicită…"
+    }
+    ,
+    "noSpecialist": "Nu aveți încă un profil de specialist.",
+    "noRequests": "Nicio cerere.",
+    "errors": {
+      "loadFailed": "Încărcarea cererilor a eșuat.",
+      "acceptFailed": "Preluarea cazului a eșuat.",
+      "createFailed": "Crearea cererii a eșuat.",
+      "missingUser": "Sesiune utilizator lipsă. Vă rugăm să vă autentificați din nou."
+    },
+    "notifications": {
+      "accepted": "Cererea a fost acceptată.",
+      "created": "Cererea a fost trimisă."
+    }
+  }
+}

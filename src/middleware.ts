@@ -11,6 +11,7 @@ const isPublicRoute = (pathname: string) => {
 const isProtectedRoute = (pathname: string) => {
   if (pathname === '/dashboard') return true;
   if (pathname === '/profile' || pathname.startsWith('/profile/')) return true;
+  if (pathname === '/requests' || pathname.startsWith('/requests/')) return true;
   if (pathname.startsWith('/specialists')) return true;
   return false;
 };

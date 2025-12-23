@@ -6,13 +6,12 @@ import {
   Alert,
   Box,
   Button,
-  Chip,
   CircularProgress,
   Paper,
   Typography
 } from '@mui/material';
 import { createSpecialist, updateSpecialist, uploadPrivateAvatar } from '@/lib/specialists/client';
-import type { SpecialistInsert, SpecialistRow, SpecialistUpdate } from '@/types/supabase';
+import type { SpecialistRow, SpecialistUpdate } from '@/types/supabase';
 import ContactCard from './components/ContactCard';
 import BioCard from './components/BioCard';
 import { profileFormSchema, type FormValues } from './formSchema';
@@ -51,7 +50,7 @@ export const ProfileClient = ({ userId, userEmail, initialSpecialist, initialAva
       phone: specialist?.phone ?? '',
       website: specialist?.website ?? '',
       about: specialist?.about ?? '',
-      avatarAlt: (specialist as any)?.avatar_alt ?? '',
+      avatarAlt: specialist?.avatar_alt ?? '',
       isVerified: specialist?.isVerified ?? false
     }
   });
@@ -59,10 +58,10 @@ export const ProfileClient = ({ userId, userEmail, initialSpecialist, initialAva
   const syncFormToSaved = (saved: SpecialistRow) => {
     reset({
       fullname: saved.fullname ?? '',
-      phone: (saved.phone ?? '') as any,
-      website: (saved.website ?? '') as any,
-      about: (saved.about ?? '') as any,
-      avatarAlt: ((saved as any)?.avatar_alt ?? '') as any,
+      phone: saved.phone ?? '',
+      website: saved.website ?? '',
+      about: saved.about ?? '',
+      avatarAlt: saved.avatar_alt ?? '',
       isVerified: saved.isVerified ?? false
     });
     
@@ -133,8 +132,8 @@ export const ProfileClient = ({ userId, userEmail, initialSpecialist, initialAva
       syncFormToSaved(data);
 
       notify.success(isCreate ? tProfile('created') : tProfile('saved'));
-    } catch (err: any) {
-      const msg = err?.message ?? tProfile('saveFailed');
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : tProfile('saveFailed');
       setErrorMessage(msg);
       notify.error(tProfile('saveFailed'));
       return;

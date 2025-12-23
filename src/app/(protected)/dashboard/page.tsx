@@ -1,5 +1,6 @@
 import { Box, Paper, Typography } from '@mui/material';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
+import RequestChatButton from './RequestChatButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -8,6 +9,9 @@ export default async function DashboardPage() {
   const {
     data: { user }
   } = await supabase.auth.getUser();
+
+  const userId = user?.id ?? null;
+  const userEmail = user?.email ?? null;
 
   return (
     <Box sx={{ display: 'grid', gap: 2 }}>
@@ -19,6 +23,10 @@ export default async function DashboardPage() {
         <Typography variant="body2" color="text.secondary">
           {user?.email ?? 'Unknown user'}
         </Typography>
+
+        <Box sx={{ mt: 2 }}>
+          <RequestChatButton userId={userId} userEmail={userEmail} />
+        </Box>
       </Paper>
     </Box>
   );
