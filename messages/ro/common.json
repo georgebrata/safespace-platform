@@ -1,0 +1,12 @@
+{
+  "app": {
+    "language": "Limbă",
+    "account": "Cont",
+    "dashboard": "Panou",
+    "myProfile": "Profilul meu",
+    "editProfile": "Editează profilul",
+    "specialists": "Specialiști",
+    "signOut": "Deconectare",
+    "signingOut": "Se deconectează…"
+  }
+}

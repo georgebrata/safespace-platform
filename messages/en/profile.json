@@ -1,0 +1,51 @@
+{
+  "profile": {
+    "editProfile": "Edit profile",
+    "view": {
+      "specialistInfoTitle": "Specialist information",
+      "whoIsTitle": "Who is {name}?"
+    },
+    "saveChanges": "Save changes",
+    "created": "Profile created.",
+    "saved": "Changes saved.",
+    "saveFailed": "Failed to save profile.",
+    "createProfile": "Create profile",
+    "saving": "Saving…",
+    "status": {
+      "unsavedTitle": "Unsaved changes",
+      "savedTitle": "All changes saved",
+      "unsavedHint": "Review your updates, then save.",
+      "savedHint": "Make an edit to enable saving."
+    },
+    "picture": {
+      "title": "Profile picture",
+      "description": "Add a clear photo of yourself. This helps clients recognize and trust you."
+    },
+
+    "contactCard": {
+      "title": "Contact details",
+      "subtitle": "This helps clients reach you and builds trust.",
+      "emailLabel": "Email",
+      "emailHelper": "Managed by your account settings",
+      "fullNameLabel": "Full name",
+      "phoneLabel": "Phone",
+      "phonePlaceholder": "+40 076 000 000",
+      "websiteLabel": "Website",
+      "websitePlaceholder": "https://example.com"
+    },
+
+    "bioCard": {
+      "title": "Professional bio",
+      "subtitle": "A short description of your background and how you help.",
+      "tipsTitle": "Not sure what to write? Consider including:",
+      "tips": {
+        "specialties": "Specialties and who you typically support",
+        "approach": "Your approach or methods (in simple terms)",
+        "experience": "Years of experience and credentials (if relevant)",
+        "format": "Session format (online/in-person) and availability"
+      },
+      "aboutLabel": "About",
+      "aboutCounter": "{count}/{max}"
+    }
+  }
+}

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   AppBar,
+  Avatar,
   Box,
   Button,
   Divider,
@@ -14,15 +15,20 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Menu,
+  MenuItem,
+  Stack,
   Toolbar,
   Typography
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PeopleIcon from '@mui/icons-material/People';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { createBrowserSupabaseClient } from '@/lib/supabase/client';
+import LocaleSwitcher from '@/components/i18n/LocaleSwitcher';
+import { useTranslations } from 'next-intl';
+import { emailInitial, stringToColor } from '@/app/utils/avatar';
 
 const drawerWidth = 260;
 
@@ -34,8 +40,14 @@ type AppShellProps = {
 export const AppShell = ({ userEmail, children }: AppShellProps) => {
   const router = useRouter();
   const pathname = usePathname();
+  const tApp = useTranslations('app');
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isSigningOut, setIsSigningOut] = React.useState(false);
+  const [accountAnchorEl, setAccountAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const isAccountMenuOpen = Boolean(accountAnchorEl);
+  const openAccountMenu = (event: React.MouseEvent<HTMLElement>) => setAccountAnchorEl(event.currentTarget);
+  const closeAccountMenu = () => setAccountAnchorEl(null);
 
   const toggleDrawer = () => setMobileOpen((v) => !v);
 
@@ -52,21 +64,30 @@ export const AppShell = ({ userEmail, children }: AppShellProps) => {
   };
 
   const navItems = [
-    { href: '/dashboard', label: 'Dashboard', icon: <DashboardIcon /> },
-    { href: '/profile', label: 'My profile', icon: <AccountCircleIcon /> },
-    { href: '/specialists', label: 'Specialists', icon: <PeopleIcon /> }
+    { href: '/dashboard', label: tApp('dashboard'), icon: <DashboardIcon /> },
+    { href: '/specialists', label: tApp('specialists'), icon: <PeopleIcon /> }
   ] as const;
+
+  const headerTitle = pathname?.startsWith('/profile')
+    ? tApp('myProfile')
+    : navItems.find((n) => n.href === pathname)?.label ?? 'App';
 
   const drawer = (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <Box sx={{ px: 2.5, py: 2 }}>
-        <Typography variant="h6" sx={{ fontWeight: 800 }}>
-          Safespace
-        </Typography>
-        <Typography variant="body2" color="text.secondary" noWrap>
-          {userEmail}
-        </Typography>
-      </Box>
+      <Stack sx={{ alignItems: 'center'}}>
+        <Box
+          component="img"
+          src="/brand/safespace logo dark vertical.png"
+          alt="Safespace"
+          sx={{
+            display: 'block',
+            width: 150,
+            height: 150,
+            objectFit: 'contain',
+            mb: 0.75
+          }}
+        />
+      </Stack>
       <Divider />
       <List sx={{ px: 1, py: 1 }}>
         {navItems.map((item) => {
@@ -93,9 +114,9 @@ export const AppShell = ({ userEmail, children }: AppShellProps) => {
           onClick={onSignOut}
           startIcon={<LogoutIcon />}
           disabled={isSigningOut}
-          aria-label="Sign out"
+          aria-label={tApp('signOut')}
         >
-          {isSigningOut ? 'Signing out…' : 'Sign out'}
+          {isSigningOut ? tApp('signingOut') : tApp('signOut')}
         </Button>
       </Box>
     </Box>
@@ -108,6 +129,7 @@ export const AppShell = ({ userEmail, children }: AppShellProps) => {
         color="inherit"
         elevation={0}
         sx={{
+          zIndex: (t) => t.zIndex.drawer + 2,
           borderBottom: 1,
           borderColor: 'divider',
           width: { sm: `calc(100% - ${drawerWidth}px)` },
@@ -125,8 +147,63 @@ export const AppShell = ({ userEmail, children }: AppShellProps) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            {navItems.find((n) => n.href === pathname)?.label ?? 'App'}
+            {headerTitle}
           </Typography>
+
+          <Box sx={{ flex: 1 }} />
+
+          <LocaleSwitcher size="small" />
+
+          <IconButton
+            color="inherit"
+            aria-label={tApp('account')}
+            onClick={openAccountMenu}
+            sx={{ ml: 0.5 }}
+          >
+            <Avatar
+              sx={{
+                width: 32,
+                height: 32,
+                bgcolor: stringToColor(userEmail)
+              }}
+            >
+              {emailInitial(userEmail)}
+            </Avatar>
+          </IconButton>
+
+          <Menu
+            anchorEl={accountAnchorEl}
+            open={isAccountMenuOpen}
+            onClose={closeAccountMenu}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+          >
+            <Box sx={{ px: 2, py: 1, maxWidth: 280 }}>
+              <Typography variant="subtitle2" sx={{ fontWeight: 800 }} noWrap>
+                {tApp('account')}
+              </Typography>
+              <Typography variant="body2" color="text.secondary" noWrap>
+                {userEmail}
+              </Typography>
+            </Box>
+            <Divider />
+            <MenuItem component={Link} href="/profile" onClick={closeAccountMenu}>
+              {tApp('myProfile')}
+            </MenuItem>
+            <MenuItem component={Link} href="/profile/edit" onClick={closeAccountMenu}>
+              {tApp('editProfile')}
+            </MenuItem>
+            <Divider />
+            <MenuItem
+              onClick={async () => {
+                closeAccountMenu();
+                await onSignOut();
+              }}
+              disabled={isSigningOut}
+            >
+              {tApp('signOut')}
+            </MenuItem>
+          </Menu>
         </Toolbar>
       </AppBar>
 
@@ -145,7 +222,11 @@ export const AppShell = ({ userEmail, children }: AppShellProps) => {
           ModalProps={{ keepMounted: true }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: drawerWidth,
+              bgcolor: '#F5F1E6'
+            }
           }}
         >
           {drawer}
@@ -155,7 +236,11 @@ export const AppShell = ({ userEmail, children }: AppShellProps) => {
           open
           sx={{
             display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: drawerWidth,
+              bgcolor: '#F5F1E6'
+            }
           }}
         >
           {drawer}

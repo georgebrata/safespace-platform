@@ -1,0 +1,51 @@
+{
+  "profile": {
+    "editProfile": "Editează profilul",
+    "view": {
+      "specialistInfoTitle": "Informații specialist",
+      "whoIsTitle": "Cine este {name}?"
+    },
+    "saveChanges": "Salvează modificările",
+    "created": "Profil creat.",
+    "saved": "Modificările au fost salvate.",
+    "saveFailed": "Nu s-a putut salva profilul.",
+    "createProfile": "Creează profil",
+    "saving": "Se salvează…",
+    "status": {
+      "unsavedTitle": "Modificări nesalvate",
+      "savedTitle": "Toate modificările sunt salvate",
+      "unsavedHint": "Verifică modificările, apoi salvează.",
+      "savedHint": "Fă o modificare pentru a putea salva."
+    },
+    "picture": {
+      "title": "Poză de profil",
+      "description": "Adaugă o poză clară cu tine. Ajută clienții să te recunoască și să aibă încredere."
+    },
+
+    "contactCard": {
+      "title": "Date de contact",
+      "subtitle": "Ajută clienții să te contacteze și crește încrederea.",
+      "emailLabel": "Email",
+      "emailHelper": "Gestionat din setările contului",
+      "fullNameLabel": "Nume complet",
+      "phoneLabel": "Telefon",
+      "phonePlaceholder": "+40 076 000 000",
+      "websiteLabel": "Website",
+      "websitePlaceholder": "https://example.com"
+    },
+
+    "bioCard": {
+      "title": "Descriere profesională",
+      "subtitle": "O descriere scurtă a experienței tale și cum ajuți.",
+      "tipsTitle": "Nu știi ce să scrii? Poți include:",
+      "tips": {
+        "specialties": "Specializări și pe cine ajuți de obicei",
+        "approach": "Abordarea sau metodele (în termeni simpli)",
+        "experience": "Ani de experiență și acreditări (dacă e relevant)",
+        "format": "Formatul ședințelor (online/față în față) și disponibilitatea"
+      },
+      "aboutLabel": "Despre",
+      "aboutCounter": "{count}/{max}"
+    }
+  }
+}

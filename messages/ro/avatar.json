@@ -1,0 +1,10 @@
+{
+  "avatar": {
+    "uploadImage": "Încarcă imagine",
+    "selected": "Selectat: {fileName}",
+    "notSavedYet": "Încă nu a fost salvat — apasă „Salvează modificările” pentru a încărca.",
+    "remove": "Elimină",
+    "invalidType": "Te rugăm să selectezi un fișier imagine (JPG, PNG etc.).",
+    "tooLarge": "Imaginea este prea mare. Dimensiunea maximă este 5MB."
+  }
+}

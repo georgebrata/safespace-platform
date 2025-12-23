@@ -1,0 +1,10 @@
+{
+  "avatar": {
+    "uploadImage": "Upload image",
+    "selected": "Selected: {fileName}",
+    "notSavedYet": "Not saved yet — click “Save changes” to upload.",
+    "remove": "Remove",
+    "invalidType": "Please select an image file (JPG, PNG, etc.).",
+    "tooLarge": "Image is too large. Max size is 5MB."
+  }
+}
